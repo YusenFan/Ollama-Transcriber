@@ -2,10 +2,9 @@
 
 ## Setup
 
-### Open VSCode
+### Select Python Interpreter Version Between 3.8-3.11
 
-- **Select Python Interpreter version between 3.8-3.11**
-  - I am using Python 3.10.11
+- I am using Python 3.10.11
 
 ### Install `ffmpeg` Globally as PowerShell Administrator
 
