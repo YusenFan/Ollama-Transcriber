@@ -1,0 +1,100 @@
+llm: 
+  model_name: "llama3.1:8b" # REQUIRED
+  max_retries: 3 # OPTIONAL
+  retry_delay: 2 # OPTIONAL
+  api_url: "http://localhost:11434/api/generate"
+  options:
+    temperature: 0.7 # OPTIONAL
+    top_p: 0.9 # OPTIONAL
+    max_tokens: 8000 # OPTIONAL
+
+output:
+  format: "md" # OPTIONAL
+  log_file: "./data/transcript_processor.log" # REQUIRED
+
+paths: 
+  input_transcript: "./data/transcriptions/Paul Graham Audio Essays - Founder mode.txt" # REQUIRED
+  output_directory: "./data" # REQUIRED
+  audio_file: "./data/raw_audio/Paul Graham Audio Essays - Founder mode.mp3" # REQUIRED
+
+prompts: # OPTIONAL
+  detailed_summary: |
+    Create a comprehensive summary of the transcript with the following structure:
+    
+    1. Overview
+       - Meeting context
+       - Key participants
+       - Main objectives
+    
+    2. Discussion Points
+       - List main topics with bullet points
+       - Include relevant details and context
+       - Note any decisions made
+    
+    3. Technical Details (if any)
+       - Specifications discussed
+       - Technical requirements
+       - Implementation considerations
+    
+    4. Conclusions
+       - Summarize outcomes
+       - List next steps
+    
+    Use markdown formatting for headers and bullet points.
+
+  executive_summary: |
+    Create a concise executive summary of the following transcript.
+    Requirements:
+    1. Maximum 3 paragraphs
+    2. Focus on key decisions and outcomes
+    3. Highlight any critical deadlines or commitments
+    4. Maintain professional tone
+    5. Include any high-priority action items
+    
+    Format the output in clear, concise paragraphs.
+
+  action_items: |
+    Extract and format all action items from the transcript.
+    For each action item, include:
+    
+    1. Task description (clear and specific)
+    2. Assigned person or team (if mentioned)
+    3. Due date or timeline (if mentioned)
+    4. Priority level (High/Medium/Low, if can be inferred)
+    5. Dependencies or prerequisites (if any)
+    
+    Format each action item as:
+    - [Priority] Task: {description} | Assigned: {person} | Due: {date}
+    
+    Sort by priority (High to Low).
+
+document_format:
+  metadata:
+    header: "## Meeting Metadata"
+    fields:
+      - date
+      - duration
+      - participants
+      - location
+      - meeting_type
+    date_format: "%Y-%m-%d %H:%M:%S"
+    defaults:
+      participants: "YOUR_INPUT_HERE"
+      location: "YOUR_INPUT_HERE"
+      meeting_type: "YOUR_INPUT_HERE"
+  
+  template: |
+    # Meeting Summary Report
+
+    {metadata_section}
+    ## Executive Summary
+    {executive_summary}
+
+    ## Detailed Summary
+    {detailed_summary}
+
+    ## Action Items and Next Steps
+    {action_items}
+
+    ---
+    Generated on: {generation_timestamp}
