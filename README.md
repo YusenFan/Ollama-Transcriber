@@ -68,47 +68,41 @@ Example Successfull Output:
 #### Simple User Input
 
 ```bash
-python transcribe.py
+python3.X transcribe.py
 ```
-
-#### Model Selection
-
-The `--model` argument determines the Whisper model to use:
-
-- `tiny`: Fastest, lowest accuracy
-- `base`: Good balance of speed and accuracy
-- `small`: Better accuracy, slower than base
-- `medium`: High accuracy, slower
-- `large`: Highest accuracy, slowest
 
 #### Commandline Input
 
 ##### Single File
 
 ```bash
-python transcribe.py --mode single --input-file path/to/audio.mp3 --output-dir path/to/output --model large
+python3.X transcribe.py --mode single --input-file path/to/audio.mp3 --output-dir path/to/output --model large
 ```
 
 ##### Multiple Files
 
 ```bash
-python transcribe.py --mode multiple --input-dir path/to/audio/files --output-dir path/to/output --model base
+python3.X transcribe.py --mode multiple --input-dir path/to/audio/files --output-dir path/to/output --model base
 ```
 
 - `-h` or `--help`: To see all available options and examples
 
-- `--mode`: **REQUIRED**. Choose between 'single' or 'multiple'
-  - 'single': Transcribe one audio file
-  - 'multiple': Transcribe all audio files in a directory
+- `--mode`: Choose between 'single' or 'multiple' **REQUIRED**
+  - `single`: Transcribe one audio file
+  - `multiple`: Transcribe all audio files in a directory
 
-- `--input-file`: Path to the audio file (**REQUIRED** when mode is 'single')
+- `--input-file`: Path to the audio file **REQUIRED**
 
-- `--input-dir`: Path to directory containing audio files (**REQUIRED** when mode is 'multiple')
+- `--input-dir`: Path to directory containing audio files **REQUIRED**
 
-- `--output-dir`: **REQUIRED**. Directory where transcription files will be saved
+- `--output-dir`: Directory where transcription files will be saved **REQUIRED**
 
-- `--model`: **OPTIONAL**. Choose Whisper model size (If not specified, the script uses the 'base' model by default.)
-  - Options: 'tiny', 'base', 'small', 'medium', 'large'
+- `--model`: Choose Whisper model size (If not specified, the script uses the 'base' model by default.) **OPTIONAL**
+  - `tiny`: Fastest, lowest accuracy
+  - `base`: Good balance of speed and accuracy
+  - `small`: Better accuracy, slower than base
+  - `medium`: High accuracy, slower
+  - `large`: Highest accuracy, slowest
 
 ---
 
@@ -120,7 +114,7 @@ python transcribe.py --mode multiple --input-dir path/to/audio/files --output-di
 2. Configure and update the **REQUIRED** settings in the `config.yaml`
 
 ```bash
-python summarize.py
+python3.X summarize.py
 ```
 
 #### Example `config.yaml`
@@ -219,5 +213,5 @@ def parse_args():
 ### Override Input File and Output Directory
 
 ```bash
-python summarize.py --input-file ./new/transcript.txt --output-dir ./new/output
+python3.X summarize.py --input-file ./new/transcript.txt --output-dir ./new/output
 ```
