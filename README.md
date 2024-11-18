@@ -1,4 +1,18 @@
-# Meeting Transcriber
+# Purpose
+
+This project offers a privacy-focused solution for transcribing and summarizing audio recordings through entirely local processing. Using OpenAI's Whisper for transcription and local LLMs via Ollama for summarization, it processes audio files (MP3/WAV) entirely on your machine, ensuring sensitive content never leaves your environment.
+
+The tool automatically generates structured summaries including:
+
+- Executive overview
+- Detailed content breakdown
+- Action items
+- Meeting metadata
+
+The project uses a configuration-based approach (config.yaml) for easy customization of output formats, model parameters, and summary structures, making it adaptable for various meeting types and organizational needs
+
+---
+---
 
 ## Setup
 
@@ -46,15 +60,42 @@ Example Successfull Output:
 - **True**
 - **NVIDIA GeForce RTX 3080 Ti Laptop GPU**
 
-## Meeting Transcriber Usage
+---
+---
 
-### 1. `transcribe-args.py` (commandline arguments) or `transcribe.py` (user input)
+## Usage
 
-- The script supports two modes of operation: single file transcription and multiple files (batch) transcription.
+### 1. `transcribe.py` (user input) or `transcribe-args.py` (commandline arguments)
 
-- Supports both .mp3 and .wav audio formats.
+#### Simple User Input
 
-#### Command Line Arguments
+```bash
+python transcribe.py
+```
+
+#### Model Selection
+
+The `--model` argument determines the Whisper model to use:
+
+- `tiny`: Fastest, lowest accuracy
+- `base`: Good balance of speed and accuracy
+- `small`: Better accuracy, slower than base
+- `medium`: High accuracy, slower
+- `large`: Highest accuracy, slowest
+
+#### Commandline Input
+
+##### Single File
+
+```bash
+python transcribe.py --mode single --input-file path/to/audio.mp3 --output-dir path/to/output --model large
+```
+
+##### Multiple Files
+
+```bash
+python transcribe.py --mode multiple --input-dir path/to/audio/files --output-dir path/to/output --model base
+```
 
 - `-h` or `--help`: To see all available options and examples
 
@@ -71,46 +112,21 @@ Example Successfull Output:
 - `--model`: **OPTIONAL**. Choose Whisper model size (If not specified, the script uses the 'base' model by default.)
   - Options: 'tiny', 'base', 'small', 'medium', 'large'
 
-### Model Selection
-
-The `--model` argument determines the Whisper model to use:
-
-- `tiny`: Fastest, lowest accuracy
-- `base`: Good balance of speed and accuracy
-- `small`: Better accuracy, slower than base
-- `medium`: High accuracy, slower
-- `large`: Highest accuracy, slowest
-
-### Examples
-
-#### Simple User Input
-
-```bash
-python transcribe.py
-```
-
-#### Commandline Input
-
-##### Single File
-
-```bash
-python transcribe.py --mode single --input-file path/to/audio.mp3 --output-dir path/to/output --model large
-```
-
-##### Multiple Files
-
-```bash
-python transcribe.py --mode multiple --input-dir path/to/audio/files --output-dir path/to/output --model base
-```
+---
+---
 
 ## 2. `summarize.py`
 
 ### Configurations
 
-1. Configure the **REQUIRED** settings in the `config.yaml`
-2. Download Ollama and run your chosen model, follow the process [HERE](https://ollama.com/download).
+1. Download Ollama and run your chosen model, follow the process [HERE](https://ollama.com/download).
+2. Configure and update the **REQUIRED** settings in the `config.yaml`
 
-#### Example `config.yaml` Format
+```bash
+python summarize.py
+```
+
+#### Example `config.yaml`
 
 ```yaml
 llm: 
@@ -131,9 +147,11 @@ paths:
   input_transcript: "./data/transcriptions.txt" # REQUIRED
   output_directory: "./data" # REQUIRED
   audio_file: "./data/raw_audio.mp3" # REQUIRED
+  
+Shortened for Space...
 ```
 
-##### LLM Settings
+##### LLM Config Settings
 
 - `model_name`: Choose your Ollama model
 - `max_retries`: Number of API call attempts
@@ -158,11 +176,8 @@ paths:
 - `detailed_summary`
 - `action_items`
 
-#### `summarize.py` Usage
-
-```bash
-python summarize.py
-```
+---
+---
 
 ## Troubleshooting
 
@@ -179,7 +194,10 @@ python summarize.py
    ollama run YOUR_MODEL
    ```
 
-## TO-DO - Future Enhancements
+---
+---
+
+## TO-DO
 
 ### Command Line Overrides
 
@@ -203,7 +221,7 @@ def parse_args():
     return parser.parse_args()
 ```
 
-#### Override Input File and Output Directory
+### Override Input File and Output Directory
 
 ```bash
 python summarize.py --input-file ./new/transcript.txt --output-dir ./new/output
