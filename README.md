@@ -12,7 +12,6 @@ The tool automatically generates structured summaries including:
 The project uses a configuration-based approach (config.yaml) for easy customization of output formats, model parameters, and summary structures, making it adaptable for various meeting types and organizational needs
 
 ---
----
 
 ## Setup
 
@@ -60,7 +59,6 @@ Example Successfull Output:
 - **True**
 - **NVIDIA GeForce RTX 3080 Ti Laptop GPU**
 
----
 ---
 
 ## Usage
@@ -112,7 +110,6 @@ python transcribe.py --mode multiple --input-dir path/to/audio/files --output-di
 - `--model`: **OPTIONAL**. Choose Whisper model size (If not specified, the script uses the 'base' model by default.)
   - Options: 'tiny', 'base', 'small', 'medium', 'large'
 
----
 ---
 
 ## 2. `summarize.py`
@@ -177,7 +174,6 @@ Shortened for Space...
 - `action_items`
 
 ---
----
 
 ## Troubleshooting
 
@@ -194,7 +190,6 @@ Shortened for Space...
    ollama run YOUR_MODEL
    ```
 
----
 ---
 
 ## TO-DO
