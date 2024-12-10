@@ -44,7 +44,7 @@ python3.X -m pip install -r requirements.txt --no-warn-script-location
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 ```
 
-### Download PyTorch with CUDA Support for GPU Acceleration (OPTIONAL)
+### Download PyTorch with CUDA Support for GPU Acceleration
 
 - If you have NVIDIA GPUs, determine what compute platform you have present:
 
