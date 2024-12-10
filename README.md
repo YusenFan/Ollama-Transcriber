@@ -34,7 +34,14 @@ The project uses a configuration-based approach (config.yaml) for easy customiza
 ### Requirements Installation
 
 ```bash
-pip -r install requirements.txt
+python3.X -m pip install -r requirements.txt --no-warn-script-location
+```
+
+### Enable Long Paths
+
+- From PowerShell Administrator run the following:
+```bash
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 ```
 
 ### Download PyTorch with CUDA Support for GPU Acceleration (OPTIONAL)
@@ -76,13 +83,13 @@ python3.X transcribe.py
 ##### Single File
 
 ```bash
-python3.X transcribe.py --mode single --input-file path/to/audio.mp3 --output-dir path/to/output --model large
+python3.X transcribe-args.py --mode single --input-file ./path/to/audio.mp3 --output-dir ./path/to/output --model large
 ```
 
 ##### Multiple Files
 
 ```bash
-python3.X transcribe.py --mode multiple --input-dir path/to/audio/files --output-dir path/to/output --model base
+python3.X transcribe-args.py --mode multiple --input-dir ./path/to/audio/files --output-dir ./path/to/output --model base
 ```
 
 - `-h` or `--help`: To see all available options and examples
