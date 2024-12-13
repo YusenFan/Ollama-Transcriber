@@ -195,6 +195,9 @@ Shortened for Space...
 
 ## TO-DO
 
+### Updating README
+- Include the use of `audio-converter.py` at the beginning to ensure that audio conversion is in either .mp3 or .wav format.
+
 ### Command Line Overrides
 
 Incorporation of commandline overrides should they become a repetitive occurence.
