@@ -21,3 +21,14 @@
 2024-11-17 14:53:29,946 - INFO - Successfully generated response on attempt 1
 2024-11-17 14:53:29,948 - INFO - Successfully saved document to: data\meeting_summary_20241117.md
 2024-11-17 14:53:29,949 - INFO - Successfully processed transcript and saved to: data\meeting_summary_20241117.md
+2024-12-12 17:04:50,926 - INFO - Initialized TranscriptProcessor with model: mistral:7b-instruct-q8_0
+2024-12-12 17:04:50,938 - INFO - Successfully read transcript: data\transcriptions\Paul Graham Audio Essays - Founder mode.txt
+2024-12-12 17:04:53,600 - INFO - Audio duration: 5m 58s
+2024-12-12 17:07:23,148 - INFO - Initialized TranscriptProcessor with model: mistral:7b-instruct-q8_0
+2024-12-12 17:07:23,148 - INFO - Successfully read transcript: data\transcriptions\Armory Audio.txt
+2024-12-12 17:07:23,240 - INFO - Audio duration: 14m 46s
+2024-12-12 17:07:50,205 - INFO - Successfully generated response on attempt 1
+2024-12-12 17:07:55,660 - INFO - Successfully generated response on attempt 1
+2024-12-12 17:08:00,244 - INFO - Successfully generated response on attempt 1
+2024-12-12 17:08:00,248 - INFO - Successfully saved document to: data\meeting summaries\meeting_summary_20241212.md
+2024-12-12 17:08:00,248 - INFO - Successfully processed transcript and saved to: data\meeting summaries\meeting_summary_20241212.md

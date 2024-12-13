@@ -128,7 +128,7 @@ python3.X summarize.py
 
 ```yaml
 llm: 
-  model_name: "llama3.1:8b" # REQUIRED
+  model_name: "YOUR_MODEL_NAME" # REQUIRED
   max_retries: 3 # OPTIONAL
   retry_delay: 2 # OPTIONAL
   api_url: "http://localhost:11434/api/generate"
@@ -142,9 +142,9 @@ output:
   log_file: "./data/transcript_processor.log" # REQUIRED
 
 paths: 
-  input_transcript: "./data/transcriptions.txt" # REQUIRED
-  output_directory: "./data" # REQUIRED
-  audio_file: "./data/raw_audio.mp3" # REQUIRED
+  input_transcript: "./data/transcriptions/" # REQUIRED
+  output_directory: "./data/meeting summaries" # REQUIRED
+  audio_file: "./data/converted-audio/" # REQUIRED
   
 Shortened for Space...
 ```
@@ -222,3 +222,7 @@ def parse_args():
 ```bash
 python3.X summarize.py --input-file ./new/transcript.txt --output-dir ./new/output
 ```
+
+### Config.yaml Command Line Arguments
+- `config.yaml` should take command-line arguments rather than directy file manipulation
+- User should be able to specify the title of the summary based off of the original audio file name when placed inside of "meeting summaries" so that there is clarity.

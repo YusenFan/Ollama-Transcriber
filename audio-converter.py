@@ -65,15 +65,40 @@ def convert_audio(input_file, output_format, output_file=None):
             print(f"Supported formats: {', '.join(get_supported_formats())}")
             return False
 
-        # Generate output filename if not provided
-        if not output_file:
-            base, _ = os.path.splitext(input_file)
-            output_file = f"{base}.{output_format}"
+        # Get original filename without extension
+        original_filename = os.path.splitext(os.path.basename(input_file))[0]
 
-        # Ensure output directory exists
+        # Handle output path
+        if not output_file:
+            # If no output specified, save in same directory as input
+            output_file = f"{original_filename}.{output_format}"
+        elif os.path.isdir(output_file):
+            # If output is a directory, use original filename in that directory
+            output_file = os.path.join(output_file, f"{original_filename}.{output_format}")
+        else:
+            # If specific output path given, ensure it has the correct extension
+            output_dir = os.path.dirname(output_file)
+            if output_dir:
+                output_file = os.path.join(output_dir, f"{original_filename}.{output_format}")
+            
+        # Create output directory if it doesn't exist
         output_dir = os.path.dirname(output_file)
-        if output_dir and not os.path.exists(output_dir):
-            os.makedirs(output_dir)
+        if output_dir:
+            try:
+                os.makedirs(output_dir, exist_ok=True)
+                print(f"Created/verified directory: {output_dir}")
+            except Exception as e:
+                print(f"Error creating directory {output_dir}: {str(e)}")
+                return False
+
+        '''# Debug information (optional sanity check in the event that tool doesn't work)
+        print(f"Debug Info:")
+        print(f"Input file: {input_file}")
+        print(f"Output format: {output_format}")
+        print(f"Output file: {output_file}")
+        print(f"Output directory exists: {os.path.exists(output_dir)}")
+        print(f"Current working directory: {os.getcwd()}")
+        '''
 
         # Load and convert audio
         try:
@@ -88,6 +113,7 @@ def convert_audio(input_file, output_format, output_file=None):
 
         except Exception as e:
             print(f"Conversion error: {str(e)}")
+            print(f"Full error details: {type(e).__name__}")
             return False
 
     except Exception as e:

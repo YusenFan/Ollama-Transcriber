@@ -1,5 +1,5 @@
 llm: 
-  model_name: "llama3.1:8b" # REQUIRED
+  model_name: "mistral:7b-instruct-q8_0" # REQUIRED
   max_retries: 3 # OPTIONAL
   retry_delay: 2 # OPTIONAL
   api_url: "http://localhost:11434/api/generate"
@@ -13,9 +13,9 @@ output:
   log_file: "./data/transcript_processor.log" # REQUIRED
 
 paths: 
-  input_transcript: "./data/transcriptions/Paul Graham Audio Essays - Founder mode.txt" # REQUIRED
-  output_directory: "./data" # REQUIRED
-  audio_file: "./data/raw_audio/Paul Graham Audio Essays - Founder mode.mp3" # REQUIRED
+  input_transcript: "./data/transcriptions/Armory Audio.txt" # REQUIRED
+  output_directory: "./data/meeting summaries" # REQUIRED
+  audio_file: "./data/converted-audio/Armory Audio.wav" # REQUIRED
 
 prompts: # OPTIONAL
   detailed_summary: |
