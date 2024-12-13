@@ -231,3 +231,6 @@ python3.X summarize.py --input-file ./new/transcript.txt --output-dir ./new/outp
 ### Config.yaml Command Line Arguments
 - `config.yaml` should take command-line arguments rather than directy file manipulation
 - User should be able to specify the title of the summary based off of the original audio file name when placed inside of "meeting summaries" so that there is clarity.
+
+### Stream-line the Entire Process
+- GOAL: Start with audio conversion (if needed) > transciption > summarization all with one command...
