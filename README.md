@@ -1,6 +1,6 @@
 # Purpose
 
-This project offers a privacy-focused solution for transcribing and summarizing audio recordings through entirely local processing. Using OpenAI's Whisper for transcription and local LLMs via Ollama for summarization, it processes audio files (MP3/WAV) entirely on your machine, ensuring sensitive content never leaves your environment.
+This project offers a privacy-focused solution for transcribing and summarizing audio recordings through entirely local processing. Using OpenAI's Whisper for transcription and local LLMs via Ollama for summarization, it processes audio files (**MP3/WAV**) entirely on your machine, ensuring sensitive content never leaves your environment.
 
 The tool automatically generates structured summaries including:
 
@@ -69,6 +69,11 @@ Example Successfull Output:
 ---
 
 ## Usage
+
+### 0. Convert Audio to Acceptable Format
+
+- If your audio format is not **.MP3 or .WAV**, utilize my Audio-Converter tool [HERE](https://github.com/chumphrey-cmd/Audio-Converter).
+
 
 ### 1. `transcribe.py` (user input) or `transcribe-args.py` (commandline arguments)
 

@@ -13,9 +13,9 @@ output:
   log_file: "./data/transcript_processor.log" # REQUIRED
 
 paths: 
-  input_transcript: "./data/transcriptions/Armory Audio.txt" # REQUIRED
-  output_directory: "./data/meeting summaries" # REQUIRED
-  audio_file: "./data/converted-audio/Armory Audio.wav" # REQUIRED
+  input_transcript: "./data/transcriptions/YOUR-TEXT-HERE.txt" # REQUIRED
+  output_directory: "./data/meeting-summaries" # REQUIRED
+  audio_file: "./data/converted-audio/YOUR-AUDIO-HERE.wav" # REQUIRED
 
 prompts: # OPTIONAL
   detailed_summary: |
@@ -79,9 +79,9 @@ document_format:
       - meeting_type
     date_format: "%Y-%m-%d %H:%M:%S"
     defaults:
-      participants: "YOUR_INPUT_HERE"
-      location: "YOUR_INPUT_HERE"
-      meeting_type: "YOUR_INPUT_HERE"
+      participants: "YOUR_INPUT_HERE" # OPTIONAL
+      location: "YOUR_INPUT_HERE" # OPTIONAL
+      meeting_type: "YOUR_INPUT_HERE" # OPTIONAL
   
   template: |
     # Meeting Summary Report
