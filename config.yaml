@@ -1,5 +1,5 @@
 llm: 
-  model_name: "mistral:7b-instruct-q8_0" # REQUIRED
+  model_name: "YOUR_MODEL_HERE" # REQUIRED
   max_retries: 3 # OPTIONAL
   retry_delay: 2 # OPTIONAL
   api_url: "http://localhost:11434/api/generate"
