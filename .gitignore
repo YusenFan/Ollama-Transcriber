@@ -3,3 +3,5 @@ data-demo/
 __pycache__/
 config2.yaml
 summarize2.py
+.gptree_config
+gptree_output.txt
