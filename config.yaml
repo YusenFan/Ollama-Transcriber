@@ -1,72 +1,69 @@
 llm: 
-  model_name: "YOUR_MODEL_HERE" # REQUIRED
+  model_name: "llama3.1:8b" # REQUIRED
   max_retries: 3 # OPTIONAL
   retry_delay: 2 # OPTIONAL
   api_url: "http://localhost:11434/api/generate"
   options:
-    temperature: 0.7 # OPTIONAL
-    top_p: 0.9 # OPTIONAL
-    max_tokens: 8000 # OPTIONAL
+    temperature: 0.1 # OPTIONAL
+    top_p: 0.1 # OPTIONAL
 
 output:
   format: "md" # OPTIONAL
-  log_file: "./data/transcript_processor.log" # REQUIRED
+  log_file: "./data-demo/transcript_processor.log" # REQUIRED
 
 paths: 
   input_transcript: "./data/transcriptions/YOUR-TEXT-HERE.txt" # REQUIRED
   output_directory: "./data/meeting-summaries" # REQUIRED
   audio_file: "./data/converted-audio/YOUR-AUDIO-HERE.wav" # REQUIRED
 
-prompts: # OPTIONAL
-  detailed_summary: |
-    Create a comprehensive summary of the transcript with the following structure:
+prompts:
+  summary_prompt: |
+    Analyze the provided transcript and create a comprehensive Summary Report that captures all essential information.
     
-    1. Overview
-       - Meeting context
-       - Key participants
-       - Main objectives
+    Structure the summary as follows:
     
-    2. Discussion Points
-       - List main topics with bullet points
-       - Include relevant details and context
-       - Note any decisions made
+    1. EXECUTIVE OVERVIEW
+    - Synthesize core meeting purpose and outcomes
+    - Highlight critical decisions and strategic implications
+    - Emphasize time-sensitive matters and key commitments
+    - Identify potential risks and mitigation strategies
+    - Note any significant budget or resource implications
     
-    3. Technical Details (if any)
-       - Specifications discussed
-       - Technical requirements
-       - Implementation considerations
+    2. KEY DISCUSSION POINTS
+    - Present main topics chronologically with timestamps
+    - Include relevant context and supporting details
+    - Document specific decisions, agreements, and dissenting views
+    - Capture technical specifications and requirements where applicable
+    - Highlight cross-functional dependencies and impacts
+    - Note areas requiring additional research or clarification
+    - Record key stakeholder concerns and proposed solutions
     
-    4. Conclusions
-       - Summarize outcomes
-       - List next steps
+    3. ACTION ITEMS AND RESPONSIBILITIES
+    - List concrete tasks with clear ownership and deliverables
+    - Include specific timelines and dependencies
+    - Note required resources or prerequisites
+    - Document success criteria and acceptance metrics
+    - Identify potential blockers and contingency plans
+    - Track related tasks and downstream impacts
     
-    Use markdown formatting for headers and bullet points.
-
-  executive_summary: |
-    Create a concise executive summary of the following transcript.
-    Requirements:
-    1. Maximum 3 paragraphs
-    2. Focus on key decisions and outcomes
-    3. Highlight any critical deadlines or commitments
-    4. Maintain professional tone
-    5. Include any high-priority action items
+    4. CONCLUSIONS AND NEXT STEPS
+    - Summarize achieved outcomes against objectives
+    - List immediate next actions with owners
+    - Document any pending decisions or open issues
+    - Note scheduled follow-ups and key milestones
+    - Outline communication plan for key stakeholders
+    - Identify required changes to existing plans or processes
     
-    Format the output in clear, concise paragraphs.
-
-  action_items: |
-    Extract and format all action items from the transcript.
-    For each action item, include:
-    
-    1. Task description (clear and specific)
-    2. Assigned person or team (if mentioned)
-    3. Due date or timeline (if mentioned)
-    4. Priority level (High/Medium/Low, if can be inferred)
-    5. Dependencies or prerequisites (if any)
-    
-    Format each action item as:
-    - [Priority] Task: {description} | Assigned: {person} | Due: {date}
-    
-    Sort by priority (High to Low).
+    Format Guidelines:
+    - Use clear, professional language with consistent terminology
+    - Maintain objective tone and avoid ambiguous language
+    - Present information in order of importance within each section
+    - Use hierarchical bullet points for clarity and relationships
+    - Include specific quotes only for critical decisions or commitments
+    - Use standardized formatting for dates, times, and priorities
+    - Highlight assumptions and dependencies explicitly
+    - Maintain consistent verb tense throughout the document
+    - Use active voice for action items and responsibilities
 
 document_format:
   metadata:
@@ -87,14 +84,8 @@ document_format:
     # Meeting Summary Report
 
     {metadata_section}
-    ## Executive Summary
-    {executive_summary}
 
-    ## Detailed Summary
-    {detailed_summary}
-
-    ## Action Items and Next Steps
-    {action_items}
+    {summary}
 
     ---
     Generated on: {generation_timestamp}

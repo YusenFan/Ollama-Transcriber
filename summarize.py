@@ -178,61 +178,37 @@ class TranscriptProcessor:
                 else:
                     raise ConnectionError("Failed to connect to Ollama after max retries")
 
-    def generate_executive_summary(self, text: str) -> str:
-        """Generates a concise executive summary of the transcript."""
-        prompt = CONFIG['prompts']['executive_summary']
-        return self.generate_llm_response(prompt, text)
+    def generate_summary(self, text: str) -> str:
+        """Generates a comprehensive meeting summary."""
+        prompt = CONFIG['prompts']['summary_prompt'] # Retrieves the instructions within config.yaml
+        return self.generate_llm_response(prompt, text) # Returns the actual summary
+    
 
-    def generate_detailed_summary(self, text: str) -> str:
-        """Generates a detailed summary with structured sections."""
-        prompt = CONFIG['prompts']['detailed_summary']
-        return self.generate_llm_response(prompt, text)
-
-    def generate_action_items(self, text: str) -> str:
-        """Extracts and formats action items from the transcript."""
-        prompt = CONFIG['prompts']['action_items']
-        return self.generate_llm_response(prompt, text)
     
     def generate_summaries(self, transcript: str) -> Dict[str, str]:
-        """Generate all summaries with progress tracking using tqdm."""
-        summaries = {}
-        summary_types = [
-            ("executive_summary", self.generate_executive_summary),
-            ("detailed_summary", self.generate_detailed_summary),
-            ("action_items", self.generate_action_items)
-        ]
-        
-        # Use tqdm with a descriptive message
-        for key, method in tqdm(summary_types, desc="Generating summaries", unit="summary"):
-            summaries[key] = method(transcript)
-        
-        return summaries
+        """Generate summary with progress tracking using tqdm."""
+        with tqdm(total=1, desc="Generating summary", unit="summary") as pbar:
+            summary = self.generate_summary(transcript)
+            pbar.update(1)
+        return {"summary": summary} # Creates a dictionary using the text from LLM and places it into the key "summary"
 
     def format_document(self, summaries: Dict[str, str], metadata: Optional[Dict] = None) -> str:
-        """Formats all summaries into a structured document."""
-        # Generate metadata section
+        """Formats summary into a structured document."""
         metadata_section = ""
         if metadata:
             metadata_lines = [CONFIG['document_format']['metadata']['header']]
-            
-            # Add each configured metadata field if present
             for field in CONFIG['document_format']['metadata']['fields']:
                 value = metadata.get(field, 'Not specified')
                 metadata_lines.append(f"- {field.title()}: {value}")
-            
             metadata_section = "\n".join(metadata_lines + ["\n"])
 
-        # Get current timestamp in configured format
         generation_timestamp = datetime.now().strftime(
             CONFIG['document_format']['metadata']['date_format']
         )
 
-        # Format the document using template from config
         formatted_text = CONFIG['document_format']['template'].format(
             metadata_section=metadata_section,
-            executive_summary=summaries['executive_summary'],
-            detailed_summary=summaries['detailed_summary'],
-            action_items=summaries['action_items'],
+            summary=summaries['summary'], # Formatting the final document and places our key of "summary" into the output
             generation_timestamp=generation_timestamp
         )
 
