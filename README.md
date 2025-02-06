@@ -173,12 +173,6 @@ Shortened for Space...
 - `format`: Output format ('md' or 'txt')
 - `log_file`: Location of log file
 
-##### Prompt Templates
-
-- `executive_summary`
-- `detailed_summary`
-- `action_items`
-
 ---
 
 ## Troubleshooting

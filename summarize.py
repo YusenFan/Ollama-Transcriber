@@ -135,7 +135,9 @@ class TranscriptProcessor:
         logging.info(f"Initialized TranscriptProcessor with model: {model_name}")
 
     def read_transcript(self, file_path: str) -> str:
-        """Reads and validates the transcript file."""
+        """
+        Reads and validates the transcript file.
+        """
         try:
             path = Path(file_path)
             if not path.exists():
@@ -186,7 +188,9 @@ class TranscriptProcessor:
 
     
     def generate_summaries(self, transcript: str) -> Dict[str, str]:
-        """Generate summary with progress tracking using tqdm."""
+        """
+        Generate summary with progress tracking using tqdm.
+        """
         with tqdm(total=1, desc="Generating summary", unit="summary") as pbar:
             summary = self.generate_summary(transcript)
             pbar.update(1)

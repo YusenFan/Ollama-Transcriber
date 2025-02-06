@@ -1,20 +1,20 @@
 llm: 
-  model_name: "llama3.1:8b" # REQUIRED
-  max_retries: 3 # OPTIONAL
-  retry_delay: 2 # OPTIONAL
+  model_name: "llama3.3:latest" # REQUIRED
+  max_retries: 10 # REQUIRED
+  retry_delay: 2 # REQUIRED
   api_url: "http://localhost:11434/api/generate"
   options:
-    temperature: 0.1 # OPTIONAL
-    top_p: 0.1 # OPTIONAL
+    temperature: 0.1 # REQUIRED
+    top_p: 0.1 # REQUIRED
 
 output:
-  format: "md" # OPTIONAL
-  log_file: "./data-demo/transcript_processor.log" # REQUIRED
+  format: "md" # REQUIRED (options include md or txt)
+  log_file: "./data/transcript_processor.log" # REQUIRED
 
 paths: 
-  input_transcript: "./data/transcriptions/YOUR-TEXT-HERE.txt" # REQUIRED
+  input_transcript: "./data/transcriptions/PG-Founder-Mode.txt" # REQUIRED 
   output_directory: "./data/meeting-summaries" # REQUIRED
-  audio_file: "./data/converted-audio/YOUR-AUDIO-HERE.wav" # REQUIRED
+  audio_file: "./data/raw-audio/PG-Founder-Mode.mp3" # REQUIRED
 
 prompts:
   summary_prompt: |
@@ -27,8 +27,7 @@ prompts:
     - Highlight critical decisions and strategic implications
     - Emphasize time-sensitive matters and key commitments
     - Identify potential risks and mitigation strategies
-    - Note any significant budget or resource implications
-    
+        
     2. KEY DISCUSSION POINTS
     - Present main topics chronologically with timestamps
     - Include relevant context and supporting details
