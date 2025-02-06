@@ -1,7 +1,5 @@
 **Implementation Guide: Meeting Transcriber (Single Entry Point)**
 
-This guide outlines the steps to refactor your project, making `main.py` the sole script the user interacts with.
-
 **1. Refactor `transcribe.py` (Transcription Module):**
 
 *   **Core Transcription Logic:** `transcribe.py` will contain *only* the functions related to the core transcription process.  These functions should be designed to be reusable and independent of user interaction or file I/O.
