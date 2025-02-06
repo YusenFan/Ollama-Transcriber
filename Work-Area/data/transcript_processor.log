@@ -1,0 +1,24 @@
+2025-02-06 10:19:30,089 - INFO - Initialized TranscriptProcessor with model: llama3.3:latest
+2025-02-06 10:19:30,090 - INFO - Successfully read transcript: data\transcriptions\PG-Founder-Mode.txt
+2025-02-06 10:19:30,091 - WARNING - Could not determine audio duration: [Errno 2] No such file or directory: './data/converted-audio/PG-Founder-Mode.mp3'
+2025-02-06 10:19:30,091 - INFO - Audio duration: Duration unavailable
+2025-02-06 10:20:20,527 - INFO - Initialized TranscriptProcessor with model: llama3.3:latest
+2025-02-06 10:20:20,528 - INFO - Successfully read transcript: data\transcriptions\PG-Founder-Mode.txt
+2025-02-06 10:20:21,425 - INFO - Audio duration: 5m 58s
+2025-02-06 10:20:53,528 - WARNING - Attempt 1 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-06 10:21:27,599 - WARNING - Attempt 2 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-06 10:22:01,686 - WARNING - Attempt 3 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-06 10:22:01,688 - ERROR - Failed to process transcript: Failed to connect to Ollama after max retries
+2025-02-06 10:31:56,197 - INFO - Initialized TranscriptProcessor with model: llama3.3:latest
+2025-02-06 10:31:56,197 - INFO - Successfully read transcript: data\transcriptions\PG-Founder-Mode.txt
+2025-02-06 10:31:57,036 - INFO - Audio duration: 5m 58s
+2025-02-06 10:32:29,086 - WARNING - Attempt 1 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-06 10:33:03,148 - WARNING - Attempt 2 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-06 10:33:37,217 - WARNING - Attempt 3 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-06 10:33:37,218 - ERROR - Failed to process transcript: Failed to connect to Ollama after max retries
+2025-02-06 10:36:51,439 - INFO - Initialized TranscriptProcessor with model: llama3.3:latest
+2025-02-06 10:36:51,439 - INFO - Successfully read transcript: data\transcriptions\PG-Founder-Mode.txt
+2025-02-06 10:36:52,324 - INFO - Audio duration: 5m 58s
+2025-02-06 10:37:20,742 - INFO - Successfully generated response on attempt 1
+2025-02-06 10:37:20,744 - INFO - Successfully saved document to: data\meeting-summaries\meeting_summary_20250206.md
+2025-02-06 10:37:20,744 - INFO - Successfully processed transcript and saved to: data\meeting-summaries\meeting_summary_20250206.md
