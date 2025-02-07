@@ -8,11 +8,12 @@ import sys
 from time import sleep
 from tqdm import tqdm
 from pydub import AudioSegment
+import os
 
 # Load config.yaml
 def load_config():
     """Load and validate configuration from YAML file."""
-    config_path = Path(__file__).parent / "config.yaml"
+    config_path = os.path.join(os.path.dirname(__file__), '../utils/config.yaml')
     try:
         with open(config_path, 'r') as file:
             config = yaml.safe_load(file)

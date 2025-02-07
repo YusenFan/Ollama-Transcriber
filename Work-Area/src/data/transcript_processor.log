@@ -1,0 +1,30 @@
+2025-02-07 10:38:12,703 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-07 10:38:12,703 - INFO - Configuration loaded successfully
+2025-02-07 10:38:12,704 - INFO - Configured Paths:
+2025-02-07 10:38:12,704 - INFO - Input transcript path: ./src/data/transcribed-text/PG-Founder-Mode.txt
+2025-02-07 10:38:12,704 - INFO - Output directory: ./src/data/meeting-summaries
+2025-02-07 10:38:12,704 - INFO - Audio file path: ./src/data/raw-audio/PG-Founder-Mode.mp3
+2025-02-07 11:18:20,955 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-07 11:18:20,955 - INFO - Configuration loaded successfully
+2025-02-07 11:18:20,956 - INFO - Configured Paths:
+2025-02-07 11:18:20,956 - INFO - Input transcript path: ./src/data/transcribed-text/PG-Founder-Mode.txt
+2025-02-07 11:18:20,956 - INFO - Output directory: ./src/data/meeting-summaries
+2025-02-07 11:18:20,956 - INFO - Audio file path: ./src/data/raw-audio/PG-Founder-Mode.mp3
+2025-02-07 11:41:19,870 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-07 11:41:19,870 - INFO - Configuration loaded successfully
+2025-02-07 11:41:19,870 - INFO - Configured Paths:
+2025-02-07 11:41:19,870 - INFO - Input transcript path: ./src/data/transcribed-text/PG-Founder-Mode.txt
+2025-02-07 11:41:19,870 - INFO - Output directory: ./src/data/meeting-summaries
+2025-02-07 11:41:19,870 - INFO - Audio file path: ./src/data/raw-audio/PG-Founder-Mode.mp3
+2025-02-07 11:47:37,192 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-07 11:47:37,192 - INFO - Configuration loaded successfully
+2025-02-07 11:47:37,192 - INFO - Configured Paths:
+2025-02-07 11:47:37,192 - INFO - Input transcript path: ./src/data/transcribed-text/PG-Founder-Mode.txt
+2025-02-07 11:47:37,193 - INFO - Output directory: ./src/data/meeting-summaries
+2025-02-07 11:47:37,193 - INFO - Audio file path: ./src/data/raw-audio/PG-Founder-Mode.mp3
+2025-02-07 11:57:45,636 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-07 11:57:45,637 - INFO - Configuration loaded successfully
+2025-02-07 11:57:45,637 - INFO - Configured Paths:
+2025-02-07 11:57:45,637 - INFO - Input transcript path: ./src/data/transcribed-text/PG-Founder-Mode.txt
+2025-02-07 11:57:45,637 - INFO - Output directory: ./src/data/meeting-summaries
+2025-02-07 11:57:45,637 - INFO - Audio file path: ./src/data/raw-audio/PG-Founder-Mode.mp3

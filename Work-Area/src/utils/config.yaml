@@ -9,12 +9,15 @@ llm:
 
 output:
   format: "md" # REQUIRED (options include md or txt)
-  log_file: "./data/transcript_processor.log" # REQUIRED
+  log_file: "./src/data/transcript_processor.log" # REQUIRED
 
 paths: 
-  input_transcript: "./data/transcriptions/PG-Founder-Mode.txt" # REQUIRED 
-  output_directory: "./data/meeting-summaries" # REQUIRED
-  audio_file: "./data/raw-audio/PG-Founder-Mode.mp3" # REQUIRED
+  input_transcript: "./src/data/transcribed-text/PG-Founder-Mode.txt" # REQUIRED 
+  output_directory: "./src/data/meeting-summaries" # REQUIRED
+  audio_file: "./src/data/raw-audio/PG-Founder-Mode.mp3" # REQUIRED
+
+audio:
+  output_format: ".mp3" # REQUIRED (options include wav or mp3)
 
 prompts:
   summary_prompt: |
