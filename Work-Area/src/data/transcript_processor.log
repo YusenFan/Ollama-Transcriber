@@ -28,3 +28,47 @@
 2025-02-07 11:57:45,637 - INFO - Input transcript path: ./src/data/transcribed-text/PG-Founder-Mode.txt
 2025-02-07 11:57:45,637 - INFO - Output directory: ./src/data/meeting-summaries
 2025-02-07 11:57:45,637 - INFO - Audio file path: ./src/data/raw-audio/PG-Founder-Mode.mp3
+2025-02-09 16:16:04,011 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-09 16:16:04,021 - ERROR - An error occurred: 'ConfigManager' object is not subscriptable
+Traceback (most recent call last):
+  File "C:\Users\Chuma-Lab\OneDrive\Desktop\One Drive\Cybersecurity\Programming\Python\Ollama-Transcriber\Work-Area\main.py", line 36, in main
+    config['paths']['audio_file'] = str(Path(config['paths']['audio_file']).resolve())
+TypeError: 'ConfigManager' object is not subscriptable
+2025-02-09 16:25:08,414 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-09 16:25:08,414 - INFO - Configuration loaded and paths resolved successfully.
+2025-02-09 16:31:35,302 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-09 16:31:35,303 - INFO - Configuration loaded and logging set up.
+2025-02-09 16:31:35,304 - INFO - No audio conversion needed. Skipping.
+2025-02-09 16:35:54,516 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-09 16:35:54,516 - INFO - Configuration loaded and logging set up.
+2025-02-09 16:35:54,526 - INFO - No audio conversion needed. Skipping.
+2025-02-09 16:39:00,497 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-09 16:39:00,498 - INFO - Configuration loaded and logging set up.
+2025-02-09 16:39:00,498 - INFO - No audio conversion needed. Skipping.
+2025-02-09 16:41:27,343 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-09 16:41:27,344 - INFO - Configuration loaded and logging set up.
+2025-02-09 16:41:27,344 - INFO - No audio conversion needed. Skipping.
+2025-02-09 16:48:28,641 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-09 16:48:28,651 - INFO - Configuration loaded and logging set up.
+2025-02-09 16:48:29,994 - ERROR - An error occurred: Input file not found: src\data\raw-audio\ArmoryAudio.m4a
+Traceback (most recent call last):
+  File "C:\Users\Chuma-Lab\OneDrive\Desktop\One Drive\Cybersecurity\Programming\Python\Ollama-Transcriber\Work-Area\main.py", line 43, in main
+    if not convert_audio(str(audio_file_path), output_format, str(converted_audio_path)):
+  File "C:\Users\Chuma-Lab\OneDrive\Desktop\One Drive\Cybersecurity\Programming\Python\Ollama-Transcriber\Work-Area\src\audio\converter.py", line 43, in convert_audio
+    raise FileNotFoundError(f"Input file not found: {input_file}")
+FileNotFoundError: Input file not found: src\data\raw-audio\ArmoryAudio.m4a
+2025-02-09 16:48:42,029 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-09 16:48:42,031 - INFO - Configuration loaded and logging set up.
+2025-02-09 16:48:42,138 - ERROR - An error occurred: Unsupported output format: .mp3. Supported formats are: mp3, wav, ogg, m4a, flac, aac, wma
+Traceback (most recent call last):
+  File "C:\Users\Chuma-Lab\OneDrive\Desktop\One Drive\Cybersecurity\Programming\Python\Ollama-Transcriber\Work-Area\main.py", line 43, in main
+    if not convert_audio(str(audio_file_path), output_format, str(converted_audio_path)):
+  File "C:\Users\Chuma-Lab\OneDrive\Desktop\One Drive\Cybersecurity\Programming\Python\Ollama-Transcriber\Work-Area\src\audio\converter.py", line 46, in convert_audio
+    raise ValueError(f"Unsupported output format: {output_format}. Supported formats are: {', '.join(get_supported_formats())}")
+ValueError: Unsupported output format: .mp3. Supported formats are: mp3, wav, ogg, m4a, flac, aac, wma
+2025-02-09 16:49:04,297 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-09 16:49:04,297 - INFO - Configuration loaded and logging set up.
+2025-02-09 16:49:19,379 - INFO - Audio converted to: src\data\converted_audio\Armory Audiomp3
+2025-02-09 16:51:50,044 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-09 16:51:50,044 - INFO - Configuration loaded and logging set up.
+2025-02-09 16:52:03,371 - INFO - Audio converted to: src\data\converted_audio\Armory Audiomp3

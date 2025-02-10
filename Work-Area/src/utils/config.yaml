@@ -12,12 +12,15 @@ output:
   log_file: "./src/data/transcript_processor.log" # REQUIRED
 
 paths: 
-  input_transcript: "./src/data/transcribed-text/PG-Founder-Mode.txt" # REQUIRED 
+  input_transcript: "./src/data/transcribed-text/" # REQUIRED 
   output_directory: "./src/data/meeting-summaries" # REQUIRED
-  audio_file: "./src/data/raw-audio/PG-Founder-Mode.mp3" # REQUIRED
+  audio_file: "./src/data/raw-audio/Armory Audio.m4a" # REQUIRED
 
 audio:
-  output_format: ".mp3" # REQUIRED (options include wav or mp3)
+  output_format: "mp3" # REQUIRED (options include wav or mp3)
+
+audio_processing:  # Section for audio conversion paths
+  converted_audio_directory: "./src/data/converted_audio"
 
 prompts:
   summary_prompt: |
