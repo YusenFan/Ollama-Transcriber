@@ -22,6 +22,10 @@ audio:
 audio_processing:  # Section for audio conversion paths
   converted_audio_directory: "./src/data/converted_audio"
 
+transcription:
+  model_selection: "base" # REQUIRED (options include tiny, base, small, medium, large)
+  transcription_directory: "./src/data/transcribed-text" # REQUIRED
+
 prompts:
   summary_prompt: |
     Analyze the provided transcript and create a comprehensive Summary Report that captures all essential information.
