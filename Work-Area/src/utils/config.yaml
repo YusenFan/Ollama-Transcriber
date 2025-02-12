@@ -1,11 +1,17 @@
 llm: 
-  model_name: "llama3.3:latest" # REQUIRED
-  max_retries: 10 # REQUIRED
-  retry_delay: 2 # REQUIRED
+  model_name: "mistral:7b-instruct-q8_0" # REQUIRED
+  max_retries: 5 # REQUIRED
+  retry_delay: 3 # REQUIRED
   api_url: "http://localhost:11434/api/generate"
   options:
-    temperature: 0.1 # REQUIRED
-    top_p: 0.1 # REQUIRED
+    temperature: 0.3 # REQUIRED
+    top_p: 0.5 # REQUIRED
+    num_ctx: 16384 # (options include 4096, 8192, 16384, 32768, 65536 depnding on RAM)
+    num_predict: 1024
+    top_k: 40
+    repeat_penalty: 1.15
+    num_gpu: 50 
+
 
 output:
   format: "md" # REQUIRED (options include md or txt)
