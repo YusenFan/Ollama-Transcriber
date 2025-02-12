@@ -51,13 +51,13 @@ class ConfigManager:
         ValueError: If any required section or path is missing
         """
         # Check for required top-level sections
-        required_sections = ['llm', 'output', 'paths', 'audio', 'prompts', 'document_format']
+        required_sections = ['llm', 'output', 'paths', 'audio', 'audio_processing', 'transcription', 'prompts', 'document_format']
         for section in required_sections:
             if section not in config:
                 raise ValueError(f"Missing required config section: {section}")
 
         # Check for required paths within the paths section
-        required_paths = ['input_transcript', 'output_directory', 'audio_file']
+        required_paths = ['input_transcript', 'audio_file']
         for path in required_paths:
             if path not in config['paths']:
                 raise ValueError(f"Missing required path: {path}")
@@ -87,7 +87,7 @@ class ConfigManager:
         Logs the verification process.
         """
         # Create output directory if it doesn't exist
-        output_dir = Path(self.config['paths']['output_directory'])
+        output_dir = Path(self.config['transcription']['meeting_summary_directory'])
         output_dir.mkdir(parents=True, exist_ok=True)
         logging.info(f"Verified output directory: {output_dir}")
 

@@ -48,3 +48,88 @@
 2025-02-10 14:10:24,401 - INFO - Configuration loaded and logging set up.
 2025-02-10 14:10:31,496 - INFO - Audio converted to: src\data\converted_audio\Armory Audio.mp3
 2025-02-10 14:10:34,881 - INFO - Starting transcription...
+2025-02-11 10:09:49,788 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 10:09:49,789 - INFO - Configuration loaded and logging set up.
+2025-02-11 10:09:57,758 - INFO - Audio converted to: src\data\converted_audio\Armory Audio.mp3
+2025-02-11 10:10:02,966 - INFO - Starting transcription...
+2025-02-11 11:35:41,460 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 11:35:41,461 - INFO - Configuration loaded and logging set up.
+2025-02-11 11:35:50,420 - INFO - Audio converted to: src\data\converted_audio\Armory Audio.mp3
+2025-02-11 11:35:54,457 - INFO - Starting transcription...
+2025-02-11 11:41:23,469 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 11:41:23,470 - INFO - Configuration loaded and logging set up.
+2025-02-11 11:41:31,075 - INFO - Audio converted to: src\data\converted_audio\Armory Audio.mp3
+2025-02-11 11:41:35,158 - INFO - Starting transcription...
+2025-02-11 11:49:07,851 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 11:49:07,851 - INFO - Configuration loaded and logging set up.
+2025-02-11 11:49:11,983 - INFO - Audio converted to: src\data\converted_audio\PG-Founder-Mode.mp3
+2025-02-11 11:49:16,054 - INFO - Starting transcription...
+2025-02-11 11:54:41,210 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 11:54:41,211 - INFO - Configuration loaded and logging set up.
+2025-02-11 11:54:45,114 - INFO - Audio converted to: src\data\converted_audio\PG-Founder-Mode.mp3
+2025-02-11 11:54:49,254 - INFO - Starting transcription...
+2025-02-11 11:58:08,157 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 11:58:08,158 - INFO - Configuration loaded and logging set up.
+2025-02-11 11:58:12,364 - INFO - Audio converted to: src\data\converted_audio\PG-Founder-Mode.mp3
+2025-02-11 11:58:17,229 - INFO - Starting transcription...
+2025-02-11 12:03:25,347 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 12:03:25,348 - INFO - Configuration loaded and logging set up.
+2025-02-11 12:03:29,778 - INFO - Audio converted to: src\data\converted_audio\PG-Founder-Mode.mp3
+2025-02-11 12:03:34,736 - INFO - Starting transcription...
+2025-02-11 12:20:10,302 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 12:20:10,303 - INFO - Configuration loaded and logging set up.
+2025-02-11 12:20:14,413 - INFO - Audio converted to: src\data\converted_audio\PG-Founder-Mode.mp3
+2025-02-11 12:20:18,469 - INFO - Starting transcription...
+2025-02-11 13:52:19,180 - ERROR - An error occurred: 'output_directory'
+Traceback (most recent call last):
+  File "C:\Users\chumahumphrey\Desktop\GitHub\Ollama-Transcriber\Work-Area\main.py", line 20, in main
+    config_manager = ConfigManager()
+  File "C:\Users\chumahumphrey\Desktop\GitHub\Ollama-Transcriber\Work-Area\src\utils\config.py", line 24, in __init__
+    self._verify_paths()
+  File "C:\Users\chumahumphrey\Desktop\GitHub\Ollama-Transcriber\Work-Area\src\utils\config.py", line 90, in _verify_paths
+    output_dir = Path(self.config['paths']['output_directory'])
+KeyError: 'output_directory'
+2025-02-11 14:00:41,768 - ERROR - Unexpected error in main process: 'output_directory'
+Traceback (most recent call last):
+  File "C:\Users\chumahumphrey\Desktop\GitHub\Ollama-Transcriber\Work-Area\main.py", line 32, in main
+    config_manager = ConfigManager()
+  File "C:\Users\chumahumphrey\Desktop\GitHub\Ollama-Transcriber\Work-Area\src\utils\config.py", line 24, in __init__
+    self._verify_paths()
+  File "C:\Users\chumahumphrey\Desktop\GitHub\Ollama-Transcriber\Work-Area\src\utils\config.py", line 90, in _verify_paths
+    output_dir = Path(self.config['paths']['output_directory'])
+KeyError: 'output_directory'
+2025-02-11 14:02:39,837 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 14:02:39,838 - INFO - Configuration loaded and logging initialized.
+2025-02-11 14:02:39,839 - INFO - Audio already in correct format. Skipping conversion.
+2025-02-11 14:02:39,931 - INFO - Loading Whisper model 'base' on cuda
+2025-02-11 14:02:44,054 - INFO - Whisper model loaded successfully
+2025-02-11 14:02:44,054 - INFO - Starting audio transcription...
+2025-02-11 14:03:35,670 - INFO - Transcription completed successfully
+2025-02-11 14:03:35,670 - INFO - Starting summary generation...
+2025-02-11 14:03:35,670 - ERROR - Transcript processing failed: TranscriptSummarizer._read_transcript() takes 1 positional argument but 2 were given
+2025-02-11 14:03:35,671 - ERROR - Summary generation failed: TranscriptSummarizer._read_transcript() takes 1 positional argument but 2 were given
+2025-02-11 14:15:06,699 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 14:15:06,700 - INFO - Configuration loaded and logging initialized.
+2025-02-11 14:15:06,701 - INFO - Audio already in correct format. Skipping conversion.
+2025-02-11 14:15:06,857 - INFO - Loading Whisper model 'base' on cuda
+2025-02-11 14:15:13,107 - INFO - Whisper model loaded successfully
+2025-02-11 14:15:13,107 - INFO - Starting audio transcription...
+2025-02-11 14:16:03,213 - INFO - Transcription completed successfully
+2025-02-11 14:16:03,214 - INFO - Starting summary generation...
+2025-02-11 14:16:35,290 - WARNING - Attempt 1 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-11 14:17:09,340 - WARNING - Attempt 2 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-11 14:17:43,430 - WARNING - Attempt 3 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-11 14:18:17,475 - WARNING - Attempt 4 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-11 14:22:32,745 - INFO - Verified output directory: src\data\meeting-summaries
+2025-02-11 14:22:32,747 - INFO - Configuration loaded and logging initialized.
+2025-02-11 14:22:32,747 - INFO - Audio already in correct format. Skipping conversion.
+2025-02-11 14:22:33,216 - INFO - Loading Whisper model 'base' on cuda
+2025-02-11 14:22:37,736 - INFO - Whisper model loaded successfully
+2025-02-11 14:22:37,736 - INFO - Starting audio transcription...
+2025-02-11 14:23:24,543 - INFO - Transcription completed successfully
+2025-02-11 14:23:24,544 - INFO - Starting summary generation...
+2025-02-11 14:23:56,630 - WARNING - Attempt 1 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-11 14:24:30,742 - WARNING - Attempt 2 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-11 14:25:04,841 - WARNING - Attempt 3 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-11 14:25:38,929 - WARNING - Attempt 4 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+2025-02-11 14:26:13,011 - WARNING - Attempt 5 failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
