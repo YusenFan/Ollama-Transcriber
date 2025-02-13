@@ -1,12 +1,12 @@
 llm: 
-  model_name: "mistral:7b-instruct-q8_0" # REQUIRED
-  max_retries: 5 # REQUIRED
-  retry_delay: 3 # REQUIRED
+  model_name: "mistral:7b-instruct-q8_0" # CUSTOMIZE (select from available models)
+  max_retries: 5 
+  retry_delay: 3 
   api_url: "http://localhost:11434/api/generate"
   options:
-    temperature: 0.3 # REQUIRED
-    top_p: 0.5 # REQUIRED
-    num_ctx: 16384 # (options include 4096, 8192, 16384, 32768, 65536 depnding on RAM)
+    temperature: 0.3 
+    top_p: 0.5 
+    num_ctx: 16384 # CUSTOMIZE (options include 4096, 8192, 16384, 32768, 65536 depnding on RAM)
     num_predict: 1024
     top_k: 40
     repeat_penalty: 1.15
@@ -14,37 +14,37 @@ llm:
 
 
 output:
-  format: "md" # REQUIRED (options include md or txt)
+  format: "md" # SELECT OPTION (options include md or txt)
   log_file: "./src/data/transcript_processor.log" # REQUIRED
 
 paths: 
-  input_transcript: "./src/data/transcribed-text/" # REQUIRED 
-  audio_file: "./src/data/raw-audio/PG-Founder-Mode.mp3" # REQUIRED
+  input_transcript: "./src/data/transcribed-text/" 
+  audio_file: "./src/data/raw-audio/Armory Audio.m4a" # MODIFY_FILE_NAME_HERE
 
 audio:
-  output_format: "mp3" # REQUIRED (options include wav or mp3)
+  output_format: "mp3" # SELECT OPTION (options include wav or mp3)
 
-audio_processing:  # Section for audio conversion paths
+audio_processing: 
   converted_audio_directory: "./src/data/converted_audio"
 
 transcription:
-  model_selection: "base" # REQUIRED (options include tiny, base, small, medium, large)
-  transcription_directory: "./src/data/transcribed-text" # REQUIRED
-  meeting_summary_directory: "./src/data/meeting-summaries" # REQUIRED
+  model_selection: "base" # SELECT OPTION (options include tiny, base, small, medium, large)
+  transcription_directory: "./src/data/transcribed-text" 
+  meeting_summary_directory: "./src/data/meeting-summaries" 
 
 prompts:
-  summary_prompt: |
+  summary_prompt: | # CUSTOMIZE (modify the prompt as needed)
     Analyze the provided transcript and create a comprehensive Summary Report that captures all essential information.
     
     Structure the summary as follows:
     
-    1. EXECUTIVE OVERVIEW
+    1. **EXECUTIVE OVERVIEW**
     - Synthesize core meeting purpose and outcomes
     - Highlight critical decisions and strategic implications
     - Emphasize time-sensitive matters and key commitments
     - Identify potential risks and mitigation strategies
         
-    2. KEY DISCUSSION POINTS
+    2. **KEY DISCUSSION POINTS**
     - Present main topics chronologically with timestamps
     - Include relevant context and supporting details
     - Document specific decisions, agreements, and dissenting views
@@ -53,7 +53,7 @@ prompts:
     - Note areas requiring additional research or clarification
     - Record key stakeholder concerns and proposed solutions
     
-    3. ACTION ITEMS AND RESPONSIBILITIES
+    3. **ACTION ITEMS AND RESPONSIBILITIES**
     - List concrete tasks with clear ownership and deliverables
     - Include specific timelines and dependencies
     - Note required resources or prerequisites
@@ -61,7 +61,7 @@ prompts:
     - Identify potential blockers and contingency plans
     - Track related tasks and downstream impacts
     
-    4. CONCLUSIONS AND NEXT STEPS
+    4. **CONCLUSIONS AND NEXT STEPS**
     - Summarize achieved outcomes against objectives
     - List immediate next actions with owners
     - Document any pending decisions or open issues
