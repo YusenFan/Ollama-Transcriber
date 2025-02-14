@@ -1,7 +1,8 @@
 Archive/
-data-demo/
+Work-Area/
 __pycache__/
-config2.yaml
-summarize2.py
 .gptree_config
 gptree_output.txt
+src/data/transcript_processor.log
+src/data/converted_audio/Armory Audio.mp3
+src/data/raw-audio/Armory Audio.m4a
