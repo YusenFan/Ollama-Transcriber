@@ -47,7 +47,7 @@ The project consists of several Python modules:
 
 5.  **Summarization (Refactored):** The `summarize.py` module contains the `TranscriptProcessor` class, which handles the summarization logic.  We have refactored this module significantly. Key functions include `read_transcript()`, `generate_llm_response()`, `generate_summary()`, `generate_summaries()`, `format_document()`, and `save_document()`. These functions handle reading the transcript, interacting with the Ollama LLM, generating summaries, formatting the document, and saving the document respectively.
 
-6.  **`main.py` Integration (Corrected):** The `main.py` script now correctly integrates with the refactored `summarize.py` module.  It initializes the `TranscriptProcessor`, reads the transcript using the correct path from the config, calls the appropriate methods, and saves the document to the correct output directory (also from the config). It also imports and utilizes the `get_audio_duration` and `generate_metadata` functions.
+6.  **`main.py` Integration:** The `main.py` script now correctly integrates with the refactored `summarize.py` module.  It initializes the `TranscriptProcessor`, reads the transcript using the correct path from the config, calls the appropriate methods, and saves the document to the correct output directory (also from the config). It also imports and utilizes the `get_audio_duration` and `generate_metadata` functions.
 
 **Next Steps:**
 
