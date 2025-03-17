@@ -1,5 +1,5 @@
 llm: 
-  model_name: "llama3.1:8b" # CUSTOMIZE (select from available models)
+  model_name: "mistral:latest" # CUSTOMIZE (select from available models)
   max_retries: 5 
   retry_delay: 3 
   api_url: "http://localhost:11434/api/generate"
@@ -14,23 +14,17 @@ llm:
 
 
 output:
-  format: "md" # SELECT OPTION (options include md or txt)
-  log_file: "./src/data/transcript_processor.log" # REQUIRED
+  format: "md" # (options include md or txt)
 
-paths: 
-  input_transcript: "./src/data/transcribed-text/" 
-  audio_file: "./src/data/raw-audio/Armory Audio.m4a" # MODIFY_FILE_NAME_HERE
+paths: {}
 
 audio:
-  output_format: "mp3" # SELECT OPTION (options include wav or mp3)
+  output_format: "mp3" # (options include wav or mp3)
 
 audio_processing: 
-  converted_audio_directory: "./src/data/converted_audio"
 
 transcription:
-  model_selection: "base" # SELECT OPTION (options include tiny, base, small, medium, large)
-  transcription_directory: "./src/data/transcribed-text" 
-  meeting_summary_directory: "./src/data/meeting-summaries" 
+  model_selection: "base" # (options include tiny, base, small, medium, large)
 
 prompts:
   summary_prompt: | # CUSTOMIZE (modify the prompt as needed)

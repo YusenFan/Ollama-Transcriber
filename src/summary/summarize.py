@@ -46,6 +46,9 @@ class TranscriptSummarizer:
             Path: Path to the generated summary file
         """
         try:
+            # Strore the audio path for use in _save_document
+            self.audio_path = audio_path
+
             # Read transcript using provided path
             transcript = self._read_transcript(transcript_path)
             
@@ -150,11 +153,25 @@ class TranscriptSummarizer:
         return "\n".join(lines + ["\n"])
 
     def _save_document(self, formatted_text: str) -> Path:
-        """Save the formatted document."""
+        """
+        Save the formatted document using the audio filename and timestamp.
+        
+        Args:
+            formatted_text: The formatted document content to save
+            
+        Returns:
+            Path: The path to the saved document
+        """
         output_dir = Path(self.config['transcription']['meeting_summary_directory'])
         output_dir.mkdir(parents=True, exist_ok=True)
         
-        filename = f"meeting_summary_{datetime.now().strftime('%Y%m%d')}.{self.config['output']['format']}"
+        # Extract the audio filename from the audio path
+        audio_filename = Path(self.audio_path).stem
+        
+        # Create a filename with audio name, date and time
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        filename = f"{audio_filename}_summary_{timestamp}.{self.config['output']['format']}"
+        
         output_path = output_dir / filename
         
         try:
