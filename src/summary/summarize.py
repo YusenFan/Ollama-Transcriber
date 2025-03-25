@@ -18,6 +18,7 @@ class TranscriptSummarizer:
         self.max_retries = config['llm']['max_retries']
         self.retry_delay = config['llm']['retry_delay']
         self.llm_options = config['llm']['options']
+        logging.info("TranscriptSummarizer initialized")  # Add this line
 
     def _read_transcript(self, transcript_path: str) -> str:
         """Read transcript file.
@@ -29,6 +30,7 @@ class TranscriptSummarizer:
             str: Content of the transcript file
         """
         try:
+            logging.info(f"Reading transcript from: {transcript_path}")  # Add this line
             with open(transcript_path, 'r', encoding='utf-8') as file:
                 return file.read()
         except Exception as e:
@@ -46,6 +48,7 @@ class TranscriptSummarizer:
             Path: Path to the generated summary file
         """
         try:
+            logging.info("Starting transcript processing")  # Add this line
             # Strore the audio path for use in _save_document
             self.audio_path = audio_path
 
@@ -74,6 +77,7 @@ class TranscriptSummarizer:
         
         for attempt in range(self.max_retries):
             try:
+                logging.info(f"Attempt {attempt + 1} to generate summary")  # Add this line
                 data = {
                     "model": self.model_name,
                     "prompt": f"{prompt}\n\nText: {text}",
@@ -99,23 +103,29 @@ class TranscriptSummarizer:
 
     def _prepare_metadata(self, audio_path: str) -> Dict[str, str]:
         """Prepare document metadata."""
-        metadata = {
-            "date": datetime.now().strftime(
-                self.config['document_format']['metadata']['date_format']
-            ),
-            "duration": self._get_audio_duration(audio_path)
-        }
-        
-        # Add configured defaults
-        defaults = self.config['document_format']['metadata']['defaults']
-        for field in self.config['document_format']['metadata']['fields']:
-            metadata[field] = defaults.get(field, "Not specified")
+        try:
+            logging.info("Preparing metadata")  # Add this line
+            metadata = {
+                "date": datetime.now().strftime(
+                    self.config['document_format']['metadata']['date_format']
+                ),
+                "duration": self._get_audio_duration(audio_path)
+            }
             
-        return metadata
+            # Add configured defaults
+            defaults = self.config['document_format']['metadata']['defaults']
+            for field in self.config['document_format']['metadata']['fields']:
+                metadata[field] = defaults.get(field, "Not specified")
+                
+            return metadata
+        except Exception as e:
+            logging.error("Error preparing metadata")  # Add this line
+            raise
 
     def _get_audio_duration(self, audio_path: str) -> str:
         """Get formatted audio duration."""
         try:
+            logging.info(f"Getting audio duration for: {audio_path}")  # Add this line
             audio = AudioSegment.from_file(audio_path)
             duration = len(audio) / 1000.0
             
@@ -135,22 +145,32 @@ class TranscriptSummarizer:
 
     def _format_document(self, summaries: Dict[str, str], metadata: Dict[str, str]) -> str:
         """Format the summary document."""
-        metadata_section = self._format_metadata(metadata)
-        
-        return self.config['document_format']['template'].format(
-            metadata_section=metadata_section,
-            summary=summaries['summary'],
-            generation_timestamp=datetime.now().strftime(
-                self.config['document_format']['metadata']['date_format']
+        try:
+            logging.info("Formatting document")  # Add this line
+            metadata_section = self._format_metadata(metadata)
+            
+            return self.config['document_format']['template'].format(
+                metadata_section=metadata_section,
+                summary=summaries['summary'],
+                generation_timestamp=datetime.now().strftime(
+                    self.config['document_format']['metadata']['date_format']
+                )
             )
-        )
+        except Exception as e:
+            logging.error("Error formatting document")  # Add this line
+            raise
 
     def _format_metadata(self, metadata: Dict[str, str]) -> str:
         """Format metadata section."""
-        lines = [self.config['document_format']['metadata']['header']]
-        for field in self.config['document_format']['metadata']['fields']:
-            lines.append(f"- {field.title()}: {metadata.get(field, 'Not specified')}")
-        return "\n".join(lines + ["\n"])
+        try:
+            logging.info("Formatting metadata section")  # Add this line
+            lines = [self.config['document_format']['metadata']['header']]
+            for field in self.config['document_format']['metadata']['fields']:
+                lines.append(f"- {field.title()}: {metadata.get(field, 'Not specified')}")
+            return "\n".join(lines + ["\n"])
+        except Exception as e:
+            logging.error("Error formatting metadata section")  # Add this line
+            raise
 
     def _save_document(self, formatted_text: str) -> Path:
         """
@@ -162,19 +182,20 @@ class TranscriptSummarizer:
         Returns:
             Path: The path to the saved document
         """
-        output_dir = Path(self.config['transcription']['meeting_summary_directory'])
-        output_dir.mkdir(parents=True, exist_ok=True)
-        
-        # Extract the audio filename from the audio path
-        audio_filename = Path(self.audio_path).stem
-        
-        # Create a filename with audio name, date and time
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filename = f"{audio_filename}_summary_{timestamp}.{self.config['output']['format']}"
-        
-        output_path = output_dir / filename
-        
         try:
+            logging.info("Saving document")  # Add this line
+            output_dir = Path(self.config['transcription']['meeting_summary_directory'])
+            output_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Extract the audio filename from the audio path
+            audio_filename = Path(self.audio_path).stem
+            
+            # Create a filename with audio name, date and time
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            filename = f"{audio_filename}_summary_{timestamp}.{self.config['output']['format']}"
+            
+            output_path = output_dir / filename
+            
             with open(output_path, 'w', encoding='utf-8') as file:
                 file.write(formatted_text)
             logging.info(f"Document saved: {output_path}")

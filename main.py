@@ -1,7 +1,6 @@
+import logging
 import sys
 from pathlib import Path
-import logging
-import torch
 import whisper
 import argparse
 
@@ -27,39 +26,39 @@ def parse_arguments():
         description='Audio Transcription and Summarization Tool',
         epilog='''
 Examples:
-  # Use GUI to select audio file
-  python main.py --gui
-  
-  # Process specific audio file with default settings
-  python main.py --audio path/to/recording.mp3
-  
-  # Specify output directory and Whisper model
-  python main.py --audio path/to/recording.mp3 --output path/to/output --transcript medium
-  
-  # Use specific LLM model
-  python main.py --audio path/to/recording.mp3 --llm mistral:latest
-  
-  # Full example with all options
-  python main.py --audio path/to/recording.mp3 --output path/to/summaries --transcript medium --llm mistral:latest
+    # Use GUI to select audio file
+    python main.py --gui
+    
+    # Process specific audio file with default settings
+    python main.py --audio path/to/recording.mp3
+    
+    # Specify output directory and Whisper model
+    python main.py --audio path/to/recording.mp3 --output path/to/output --transcript medium
+    
+    # Use specific LLM model
+    python main.py --audio path/to/recording.mp3 --llm mistral:latest
+    
+    # Full example with all options
+    python main.py --audio path/to/recording.mp3 --output path/to/summaries --transcript medium --llm mistral:latest
 ''',
         formatter_class=argparse.RawDescriptionHelpFormatter  # Preserves formatting in epilog
     )
     
     parser.add_argument('--audio', type=str, 
-                      help='Path to audio file to transcribe and summarize')
+                        help='Path to audio file to transcribe and summarize')
     
     parser.add_argument('--output', type=str,
-                      help='Path to output directory for saving summaries')
+                        help='Path to output directory for saving summaries')
     
     parser.add_argument('--llm', type=str,
-                      help='Name of Ollama model to use for summarization (default: from config.yaml)')
+                        help='Name of Ollama model to use for summarization (default: from config.yaml)')
     
     parser.add_argument('--transcript', type=str, 
-                      choices=['tiny', 'base', 'small', 'medium', 'large'],
-                      help='Whisper model selection for transcription (default: from config.yaml)')
+                        choices=['tiny', 'base', 'small', 'medium', 'large'],
+                        help='Whisper model selection for transcription (default: from config.yaml)')
     
     parser.add_argument('--gui', action='store_true',
-                      help='Launch GUI file picker to select audio file')
+                        help='Launch GUI file picker to select audio file')
     
     return parser.parse_args()
 
@@ -78,6 +77,8 @@ def main():
     All paths and settings are driven by config.yaml configuration with optional
     overrides from command line arguments.
     """
+    logging.getLogger().setLevel(logging.INFO)  # Add this line
+    logging.info("Testing basic logging in main()")  # Add this line
     try:
         # Step 1: Parse command line arguments
         args = parse_arguments()
@@ -112,16 +113,6 @@ def main():
             config['transcription']['model_selection'] = args.transcript
             print(f"Whisper model set to: {args.transcript}")
 
-        # Initialize logging with configuration from config.yaml
-        logging.basicConfig(
-            filename=config['output']['log_file'],
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.FileHandler(config['output']['log_file']),
-                logging.StreamHandler(sys.stdout)
-            ]
-        )
         logging.info("Configuration loaded and logging initialized.")
         
         # Log the configuration settings being used
@@ -147,102 +138,108 @@ def main():
         converted_audio_dir.mkdir(parents=True, exist_ok=True)
 
         # Check if audio format conversion is needed
-        if audio_file_path.suffix.lower() != f".{output_format}":
-            # Generate path for converted audio file
-            converted_audio_path = converted_audio_dir / f"{audio_file_path.stem}.{output_format}"
-            logging.info(f"Converting {audio_file_path} to {output_format}")
-            print(f"Converting audio to {output_format} format...")
-            
-            try:
+        try:
+            print("Trying to convert audio")  # Add this line
+            logging.info("Trying to convert audio")  # Add this line
+            if audio_file_path.suffix.lower() != f".{output_format}":
+                # Generate path for converted audio file
+                converted_audio_path = converted_audio_dir / f"{audio_file_path.stem}.{output_format}"
+                logging.info(f"Converting {audio_file_path} to {output_format}")
+                print(f"Converting audio to {output_format} format...")
+                
                 # Attempt audio conversion
                 if not convert_audio(str(audio_file_path), output_format, str(converted_audio_path)):
                     raise ValueError(f"Audio conversion failed for {audio_file_path}")
                 logging.info(f"Audio converted successfully to: {converted_audio_path}")
                 print(f"Audio converted successfully")
-            except RuntimeError as e:
-                logging.error(f"FFmpeg Error during conversion: {e}")
-                print(f"Error: FFmpeg failed to convert audio: {e}")
-                sys.exit(1)
-            except FileNotFoundError as e:
-                logging.error(f"File error during conversion: {e}")
-                print(f"Error: {e}")
-                sys.exit(1)
+                
+                # Update path to use converted audio
+                audio_file_path = converted_audio_path
+            else:
+                logging.info("Audio already in correct format. Skipping conversion.")
+                print("Audio already in correct format. Skipping conversion.")
+        except RuntimeError as e:
+            print(f"Exception caught in audio conversion: {e}")
+            logging.error(f"FFmpeg Error during conversion: {e}")
+            print(
+                "FFmpeg not found. Please ensure ffmpeg.exe is:\n"
+                "1. Added to system PATH, or\n"
+                "2. Placed in the same directory as this script\n"
+                "Download FFmpeg from: https://github.com/BtbN/FFmpeg-Builds/releases"
+            )
+            sys.exit(1)
+        except ValueError as e:
+            print(f"Exception caught in audio conversion: {e}")
+            logging.error(f"Error during audio conversion: {e}")
+            print(f"Error: {e}")
+            sys.exit(1)
+        except Exception as e:
+            print(f"Exception caught in audio conversion: {e}")
+            logging.error(f"Unexpected error during audio conversion: {e}")
+            print(f"Error: {e}")
+            sys.exit(1)
 
-            # Update path to use converted audio
-            audio_file_path = converted_audio_path
-        else:
-            logging.info("Audio already in correct format. Skipping conversion.")
-            print("Audio already in correct format. Skipping conversion.")
-
-        # Step 4: Whisper Model Loading
-        # Configure model based on settings and available hardware
-        model_name = config['transcription']['model_selection']
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-        logging.info(f"Loading Whisper model '{model_name}' on {device}")
-        print(f"Loading Whisper model '{model_name}' on {device}...")
-        
+        # Step 4: Load Whisper Model
         try:
-            # Initialize Whisper model
-            model = whisper.load_model(model_name, device=device)
-            logging.info(f"Whisper model loaded successfully")
+            logging.info(f"Loading Whisper model: {config['transcription']['model_selection']}")
+            print(f"Loading Whisper model '{config['transcription']['model_selection']}' on cuda...")
+            model = whisper.load_model(config['transcription']['model_selection'])
+            logging.info("Whisper model loaded successfully")
             print("Whisper model loaded successfully")
         except Exception as e:
-            logging.error(f"Failed to load Whisper model: {e}")
-            print(f"Error: Failed to load Whisper model: {e}")
+            print(f"Exception caught loading whisper model: {e}")
+            logging.error(f"Error loading Whisper model: {e}")
+            print(f"Error: {e}")
             sys.exit(1)
 
         # Step 5: Audio Transcription
-        # Prepare transcription directory
-        transcription_dir = Path(config['transcription']['transcription_directory'])
-        transcription_dir.mkdir(parents=True, exist_ok=True)
-        
-        logging.info("Starting audio transcription...")
-        print("Starting audio transcription...")
         try:
-            # Perform transcription
+            logging.info("Starting audio transcription...")
+            print("Starting audio transcription...")
+            
+            # Ensure transcription directory exists
+            transcription_dir = Path(config['transcription']['transcription_directory'])
+            transcription_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Perform audio transcription
             transcribe_audio(str(audio_file_path), str(transcription_dir), model)
-            logging.info("Transcription completed successfully")
-            print("Transcription completed successfully")
+            
+            # Construct path to the transcript file
+            transcript_path = transcription_dir / f"{audio_file_path.stem}.txt"
+            logging.info(f"Transcription saved to: {transcript_path}")
+            logging.getLogger().handlers[0].flush()
+            print(f"Transcription saved to: {transcript_path}")
+            
         except Exception as e:
-            logging.error(f"Transcription failed: {e}")
-            print(f"Error: Transcription failed: {e}")
+            print(f"Exception caught in audio transcription: {e}")
+            logging.error(f"Audio transcription failed: {e}")
+            print(f"Error: {e}")
             sys.exit(1)
 
-        # Step 6: Summary Generation
-        logging.info("Starting summary generation...")
-        print("Starting summary generation...")
+        # Step 6: Transcript Summarization
         try:
-            # Initialize summarizer with configuration
+            logging.info("Starting summary generation...")
+            print("Starting summary generation...")
+            
+            # Initialize and use TranscriptSummarizer
             summarizer = TranscriptSummarizer(config)
-            
-            # Construct paths for transcript and summary
-            transcript_filename = f"{audio_file_path.stem}.txt"
-            transcript_path = transcription_dir / transcript_filename
-            
-            # Verify transcript exists
-            if not transcript_path.exists():
-                raise FileNotFoundError(f"Transcript file not found: {transcript_path}")
-            
-            # Generate summary
             summary_path = summarizer.process_transcript(
                 transcript_path=str(transcript_path),
                 audio_path=str(audio_file_path)
             )
-            
             logging.info(f"Summary generated and saved to: {summary_path}")
             print(f"Summary generated and saved to: {summary_path}")
             logging.info("Complete pipeline executed successfully")
             print("Complete pipeline executed successfully")
-            
         except Exception as e:
+            print(f"Exception caught in summary generation: {e}")
             logging.error(f"Summary generation failed: {e}")
             print(f"Error: Summary generation failed: {e}")
             sys.exit(1)
 
     except Exception as e:
-        # Catch any unexpected exceptions in the main workflow
-        logging.exception(f"Unexpected error in main process: {e}")
-        print(f"Error: Unexpected error in main process: {e}")
+        logging.error(f"Main process failed: {e}")
+        print(f"Error: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":

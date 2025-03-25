@@ -1,7 +1,6 @@
 from pathlib import Path
 import yaml
 import logging
-import os
 from typing import Dict
 
 class ConfigManager:
@@ -93,15 +92,15 @@ class ConfigManager:
         # Define default paths relative to app root
         default_paths = {
             'paths': {
-                'input_transcript': str(data_dir / "transcribed-text"),
+                'input_transcript': str(data_dir / "transcribed_text"),
                 'audio_file': str(data_dir / "raw-audio")
             },
             'audio_processing': {
                 'converted_audio_directory': str(data_dir / "converted_audio")
             },
             'transcription': {
-                'transcription_directory': str(data_dir / "transcribed-text"),
-                'meeting_summary_directory': str(data_dir / "meeting-summaries")
+                'transcription_directory': str(data_dir / "transcribed_text"),
+                'meeting_summary_directory': str(data_dir / "meeting_summaries")
             },
             'output': {
                 'log_file': str(data_dir / "logs" / "transcript_processor.log")
@@ -121,20 +120,30 @@ class ConfigManager:
         Configures logging with both file and console output.
         Uses logging configuration from config.yaml.
         """
-        # Create log directory if it doesn't exist
         log_file = Path(self.config['output']['log_file'])
-        log_file.parent.mkdir(parents=True, exist_ok=True)
+        print(f"Log file path: {log_file}")  # Print log file path
 
-        # Configure logging with both file and console handlers
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.FileHandler(str(log_file)),
-                logging.StreamHandler()
-            ]
-        )
-        logging.info(f"Logging initialized: {log_file}")
+        try:
+
+            # Create stream handler
+            stream_handler = logging.StreamHandler()
+
+            # Configure logging
+            logging.basicConfig(
+                level=logging.INFO,
+                format='%(asctime)s - %(levelname)s - %(message)s',
+                handlers=[stream_handler]
+            )
+            print("basicConfig configured")  # Confirm basicConfig
+
+            logging.info(f"Logging initialized: {log_file}")
+            print("Logging initialized (logging.info)")
+
+        except Exception as e:
+            print(f"Error setting up logging: {e}")  # Print to console
+            logging.error(f"Error setting up logging: {e}")  # Try to log the error
+            raise  # Re-raise the exception to prevent silent failure
+    
 
     def _verify_paths(self) -> None:
         """
