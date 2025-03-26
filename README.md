@@ -73,8 +73,9 @@ Example Successfull Output:
 
 ### LLM Customization
 
-- Download and run your chosen model with Ollama [HERE](https://ollama.com/download).
-- Modify the `config.yaml` file located in `src/utils/config.yaml` and specify the model that you've downloaded.
+- [Install Ollama on your system](https://ollama.com/download) and select model.
+- Modify the **`config.yaml`** file located in **`src/utils/config.yaml`** and specify the model that you've downloaded.
+- Refer to the [Ollama documentation](https://github.com/ollama/ollama/tree/main/docs) for details on other available options like `num_ctx`, `num_predict`, `top_k`, `repeat_penalty`, and `num_gpu`.
 
 ```yaml
 llm:
@@ -86,7 +87,11 @@ llm:
     # ... other options ...
 ```
 
-- Refer to the [Ollama documentation](https://github.com/ollama/ollama/tree/main/docs) for details on other available options like `num_ctx`, `num_predict`, `top_k`, `repeat_penalty`, and `num_gpu`.
+### Begin Ollama Server
+
+```bash
+ollama serve
+```
 
 ### Run Project
 
@@ -95,8 +100,6 @@ To run the project, use the `main.py` script with the following options:
 ```bash
 python3.10 main.py [OPTIONS]
 ```
-
-**[OPTIONS]**
 
 | Command                                                                | Description                                                                 |
 | :--------------------------------------------------------------------- | :-------------------------------------------------------------------------- |
