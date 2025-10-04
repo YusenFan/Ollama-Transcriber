@@ -1,5 +1,7 @@
 # Purpose
 
+This project is a fork of https://github.com/chumphrey-cmd/Ollama-Transcriber
+
 This project offers a privacy-focused solution for transcribing and summarizing audio recordings through entirely local processing on you. Using OpenAI's Whisper for transcription and local LLMs via Ollama for summarization, it processes audio files (**MP3/WAV**) entirely on your machine, ensuring sensitive content never leaves your environment.
 
 The tool automatically generates structured summaries including:
@@ -21,7 +23,7 @@ The tool automatically generates structured summaries including:
 
 ### Install `ffmpeg` Globally 
 
-**NOTE:** `ffmpeg` **DOES NOT** work in virutal environment and is required for Whisper to work. A "**[Win2]File not found error**" is thrown when attempting to use within a virtual environment, although  it is not best practice, utilize your global environment instead.
+**NOTE:** `ffmpeg` **DOES NOT** work in virutal environment and is required for Whisper to work. Not recommand using virtual environment 
 
 
 - Install FFmpeg:
