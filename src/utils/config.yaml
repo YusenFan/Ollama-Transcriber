@@ -1,5 +1,5 @@
 llm: 
-  model_name: "mistral:latest" # CUSTOMIZE (select from available models)
+  model_name: "gemma3:latest" # CUSTOMIZE (select from available models)
   max_retries: 5 
   retry_delay: 3 
   api_url: "http://localhost:11434/api/generate"
@@ -19,7 +19,7 @@ output:
 paths: {}
 
 audio:
-  output_format: "mp3" # (options include wav or mp3)
+  output_format: ["mp3"] # (options include wav or mp3)
 
 audio_processing: 
 

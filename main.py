@@ -137,15 +137,22 @@ def main():
         # Create converted audio directory if it doesn't exist
         converted_audio_dir.mkdir(parents=True, exist_ok=True)
 
-        # Check if audio format conversion is needed
+         # Check if audio format conversion is needed
         try:
-            print("Trying to convert audio")  # Add this line
-            logging.info("Trying to convert audio")  # Add this line
-            if audio_file_path.suffix.lower() != f".{output_format}":
+            print("Checking audio format...")
+            logging.info("Checking audio format...")
+            
+            # Get list of accepted formats (formats that don't need conversion)
+            accepted_formats = config['audio'].get('accepted_formats', ['wav', 'mp3'])
+            input_format = audio_file_path.suffix.lower().lstrip('.')  # Remove leading dot from .wav, .mp3, etc.
+            
+            # Only convert if input format is NOT in accepted formats list
+            if input_format not in accepted_formats:
+                output_format = config['audio']['output_format']
                 # Generate path for converted audio file
                 converted_audio_path = converted_audio_dir / f"{audio_file_path.stem}.{output_format}"
-                logging.info(f"Converting {audio_file_path} to {output_format}")
-                print(f"Converting audio to {output_format} format...")
+                logging.info(f"Converting {audio_file_path} from {input_format} to {output_format}")
+                print(f"Converting audio from {input_format} to {output_format} format...")
                 
                 # Attempt audio conversion
                 if not convert_audio(str(audio_file_path), output_format, str(converted_audio_path)):
@@ -156,8 +163,8 @@ def main():
                 # Update path to use converted audio
                 audio_file_path = converted_audio_path
             else:
-                logging.info("Audio already in correct format. Skipping conversion.")
-                print("Audio already in correct format. Skipping conversion.")
+                logging.info(f"Audio format '{input_format}' is accepted. Skipping conversion.")
+                print(f"Audio format '{input_format}' is accepted. Skipping conversion.")
         except RuntimeError as e:
             print(f"Exception caught in audio conversion: {e}")
             logging.error(f"FFmpeg Error during conversion: {e}")
@@ -214,27 +221,6 @@ def main():
             print(f"Exception caught in audio transcription: {e}")
             logging.error(f"Audio transcription failed: {e}")
             print(f"Error: {e}")
-            sys.exit(1)
-
-        # Step 6: Transcript Summarization
-        try:
-            logging.info("Starting summary generation...")
-            print("Starting summary generation...")
-            
-            # Initialize and use TranscriptSummarizer
-            summarizer = TranscriptSummarizer(config)
-            summary_path = summarizer.process_transcript(
-                transcript_path=str(transcript_path),
-                audio_path=str(audio_file_path)
-            )
-            logging.info(f"Summary generated and saved to: {summary_path}")
-            print(f"Summary generated and saved to: {summary_path}")
-            logging.info("Complete pipeline executed successfully")
-            print("Complete pipeline executed successfully")
-        except Exception as e:
-            print(f"Exception caught in summary generation: {e}")
-            logging.error(f"Summary generation failed: {e}")
-            print(f"Error: Summary generation failed: {e}")
             sys.exit(1)
 
     except Exception as e:
