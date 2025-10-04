@@ -9,7 +9,7 @@ The tool automatically generates structured summaries including:
 - Action items
 - Meeting metadata
 
-**NOTE:** This project is currently functional and tested on Windows 11.
+**NOTE:** This project is currently functional and tested on Macos Tahoe 26.0
 
 ---
 
@@ -19,17 +19,25 @@ The tool automatically generates structured summaries including:
 
 - I am using Python 3.10.11
 
-### Install `ffmpeg` Globally as PowerShell Administrator
+### Install `ffmpeg` Globally 
 
 **NOTE:** `ffmpeg` **DOES NOT** work in virutal environment and is required for Whisper to work. A "**[Win2]File not found error**" is thrown when attempting to use within a virtual environment, although  it is not best practice, utilize your global environment instead.
 
-- Follow the instructions [HERE](https://chocolatey.org/install#individual) and install choclatey install via PowerShell Administration to install `ffmpeg`.
 
 - Install FFmpeg:
 
   ```PowerShell
-    choco install ffmpeg
+    brew install ffmpeg
   ```
+
+  #### Install PyTorch
+
+For Apple Silicon (M1/M2/M3):
+```bash
+pip3 install torch torchvision torchaudio
+```
+
+PyTorch will automatically use Metal Performance Shaders (MPS) for GPU acceleration on Apple Silicon.
 
 ### Requirements Installation
 
@@ -37,35 +45,16 @@ The tool automatically generates structured summaries including:
 python3.10 -m pip install -r requirements.txt --no-warn-script-location
 ```
 
-### Enable Long Paths
-
-- From PowerShell Administrator run the following:
+#### Verify Setup
 
 ```bash
-New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+python3 pytorch_verify.py
 ```
 
-### Download PyTorch with CUDA Support for GPU Acceleration
-
-- If you have NVIDIA GPUs, determine what compute platform you have present:
-
-```bash
-  nvidia-smi.exe
-```
-
-- Identify "CUDA Version"
-- Navigate to: [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/)
-- Select options specific to your environment and install the command specified!
-- Once installation is complete run:
-
-```bash
-  python3.10 pytorch_verify.py
-```
-
-Example Successfull Output:
-
-- **True**
-- **NVIDIA GeForce RTX 3080 Ti Laptop GPU**
+Expected output for Apple Silicon:
+- Platform: Darwin
+- PyTorch version: [version]
+- Apple Metal Performance Shaders (MPS) is available
 
 ---
 

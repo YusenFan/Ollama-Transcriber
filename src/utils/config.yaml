@@ -10,7 +10,7 @@ llm:
     num_predict: 1024
     top_k: 40
     repeat_penalty: 1.15
-    num_gpu: 50 
+    num_gpu: 1
 
 
 output:
